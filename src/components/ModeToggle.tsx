@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Palette, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom"; // Add this
 
 interface ModeToggleProps {
   mode: "user" | "artist";
@@ -9,12 +10,24 @@ interface ModeToggleProps {
 }
 
 const ModeToggle: React.FC<ModeToggleProps> = ({ mode, onModeChange }) => {
+  const navigate = useNavigate(); // Initialize navigate
+
+  const handleSelection = (newMode: "user" | "artist") => {
+    onModeChange(newMode);
+    // Navigate to the correct route based on selection
+    if (newMode === "user") {
+      navigate("/customer");
+    } else {
+      navigate("/artist");
+    }
+  };
+
   return (
     <div className="flex items-center bg-background border border-border rounded-2xl p-2 shadow-card">
       <Button
         variant={mode === "user" ? "hero" : "ghost"}
         size="lg"
-        onClick={() => onModeChange("user")}
+        onClick={() => handleSelection("user")} // Use the new handler
         className={cn(
           "flex-1 rounded-xl transition-all duration-300",
           mode === "user" 
@@ -29,7 +42,7 @@ const ModeToggle: React.FC<ModeToggleProps> = ({ mode, onModeChange }) => {
       <Button
         variant={mode === "artist" ? "hero" : "ghost"}
         size="lg"
-        onClick={() => onModeChange("artist")}
+        onClick={() => handleSelection("artist")} // Use the new handler
         className={cn(
           "flex-1 rounded-xl transition-all duration-300",
           mode === "artist" 

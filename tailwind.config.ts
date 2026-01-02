@@ -1,8 +1,15 @@
 import type { Config } from "tailwindcss";
+// 👇 IMPORT THE PLUGIN INSTEAD OF REQUIRING IT
+import tailwindAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -47,12 +54,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        brand: {
-          saffron: "hsl(var(--brand-saffron))",
-          purple: "hsl(var(--brand-purple))",
-          warm: "hsl(var(--brand-warm))",
-          neutral: "hsl(var(--brand-neutral))",
-        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -64,20 +65,6 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
-      backgroundImage: {
-        "gradient-hero": "var(--gradient-hero)",
-        "gradient-card": "var(--gradient-card)",
-        "gradient-accent": "var(--gradient-accent)",
-      },
-      boxShadow: {
-        elegant: "var(--shadow-elegant)",
-        card: "var(--shadow-card)",
-        glow: "var(--shadow-glow)",
-      },
-      transitionTimingFunction: {
-        smooth: "var(--transition-smooth)",
-        bounce: "var(--transition-bounce)",
-      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -85,27 +72,26 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      backgroundImage: {
+        'gradient-sunset': "var(--gradient-sunset)",
+        'gradient-indigo': "var(--gradient-indigo)",
+        'gradient-warm': "var(--gradient-warm)",
+        'gradient-craft': "var(--gradient-craft)",
+      }
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  // 👇 USE THE IMPORTED VARIABLE HERE
+  plugins: [tailwindAnimate],
 } satisfies Config;
